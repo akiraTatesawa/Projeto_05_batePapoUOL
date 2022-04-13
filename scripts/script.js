@@ -41,7 +41,7 @@ function buscaMensagens () {
     atualizaMensagens = setInterval(function () {
         let promise = axios.get("https://mock-api.driven.com.br/api/v6/uol/messages");
         promise.then(carregaMensagens);
-        }, 2000);
+        }, 2500);
 }
 
 function entrarSala () {
@@ -93,6 +93,15 @@ function enviaMensagem (el) {
     
     document.querySelector("input").value = "";
 }
+
+//Envia mensagem com enter
+const input = document.querySelector("input");
+input.addEventListener("keydown", function(e){
+    if (e.key === "Enter") {
+        document.querySelector(".send").click();
+    }
+});
+
 
 buscaMensagens();
 verificaUsuario();
