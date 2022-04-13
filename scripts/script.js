@@ -1,7 +1,6 @@
 let usuario; //Objeto
 let conexao; //Intervalo
 let atualizaMensagens; //Intervalo
-let mensagem;
 
 function carregaMensagens (response) {
     const campoMensagens = document.querySelector(".mensagens");
@@ -34,8 +33,8 @@ function carregaMensagens (response) {
                 </p>
             </div>`
         }
-        campoMensagens.scrollIntoView(false);
     }
+    campoMensagens.scrollIntoView(false);
 }
 
 function buscaMensagens () {
@@ -74,12 +73,12 @@ function mantemConexao (usuario) {
     conexao = setInterval(function () {
         axios.post("https://mock-api.driven.com.br/api/v6/uol/status", usuario)
         console.log("Ainda está online!")
-    }, 3000)
+    }, 3000);
 }
 
 function enviaMensagem (el) {
     const textoMensagem = document.querySelector("input").value;
-    mensagem = {
+    const mensagem = {
         from: usuario.name,
         to: "Todos",
         text: textoMensagem,
