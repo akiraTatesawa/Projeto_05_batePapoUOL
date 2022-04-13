@@ -45,26 +45,33 @@ function buscaMensagens () {
 }
 
 function entrarSala () {
-    const usuarioNome = prompt("Digite o seu nome:");
+    const usuarioNome = document.querySelector(".login").value;
     const usuario = {
-        name: usuarioNome
-    }
+        name:usuarioNome
+    };
     return usuario;
 }
 
 function loginSucesso () {
     console.log("Deu certo! Bem-vindo!");
+    document.querySelector(".tela-entrada").classList.add("escondido");
     mantemConexao(usuario);
 }
 
 function loginError () {
     alert("Este nome já está sendo usado!");
-    verificaUsuario();
+    window.location.reload();
 }
 
 function verificaUsuario () {
     usuario = entrarSala();
     const promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants", usuario);
+
+    document.querySelector(".tela-entrada").innerHTML = `
+    <img src="./media/logo 2.png" class="logo-entrada" alt="Logomarca do Bate-Papo UOL" />
+    <img src="./media/loading-gif-transparent-10.gif" class="loading" alt="GIF de loading" />
+    <p>Entrando</p>`
+
     promise.then(loginSucesso);
     promise.catch(loginError);
 }
@@ -88,21 +95,26 @@ function enviaMensagem (el) {
     const promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages", mensagem);
     promise.then(carregaMensagens);
     promise.catch(function () {
-        // window.location.reload();
+        window.location.reload();
         console.log("falhou");
     });
 
     document.querySelector(".campo-mensagem").value = "";
 }
 
-//Envia mensagem com enter
+//Envia com enter
 const input = document.querySelector(".campo-mensagem");
 input.addEventListener("keydown", function(e){
     if (e.key === "Enter") {
         document.querySelector(".send").click();
     }
 });
+const inputLogin = document.querySelector(".login");
+inputLogin.addEventListener("keydown", function(e){
+    if (e.key === "Enter") {
+        document.querySelector(".login-enter").click();
+    }
+});
 
 
 buscaMensagens();
-verificaUsuario();

@@ -62,9 +62,14 @@ strong {
     color: #AEAEAE;;
 }
 
-.tela-entrada img {
+.logo-entrada {
     margin-top: 72px;
     margin-bottom: 92px;
+}
+
+.loading {
+    width: 130px;
+    margin-bottom: 10px;
 }
 
 .header-conteudo {
