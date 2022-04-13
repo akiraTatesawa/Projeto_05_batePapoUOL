@@ -77,7 +77,7 @@ function mantemConexao (usuario) {
 }
 
 function enviaMensagem (el) {
-    const textoMensagem = document.querySelector("input").value;
+    const textoMensagem = document.querySelector(".campo-mensagem").value;
     const mensagem = {
         from: usuario.name,
         to: "Todos",
@@ -88,14 +88,15 @@ function enviaMensagem (el) {
     const promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages", mensagem);
     promise.then(carregaMensagens);
     promise.catch(function () {
-        window.location.reload();
-    })
-    
-    document.querySelector("input").value = "";
+        // window.location.reload();
+        console.log("falhou");
+    });
+
+    document.querySelector(".campo-mensagem").value = "";
 }
 
 //Envia mensagem com enter
-const input = document.querySelector("input");
+const input = document.querySelector(".campo-mensagem");
 input.addEventListener("keydown", function(e){
     if (e.key === "Enter") {
         document.querySelector(".send").click();
