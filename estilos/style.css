@@ -52,7 +52,7 @@ strong {
     width: 100%;
     height: 100%;
     margin-top: 106px;
-    margin-bottom: 95px;
+    padding-bottom: 95px;
 }
 
 .mensagem {
@@ -125,5 +125,6 @@ footer {
 
 .footer-conteudo ion-icon {
     font-size: 26px;
+    cursor: pointer;
 }
 

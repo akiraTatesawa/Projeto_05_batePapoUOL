@@ -1,12 +1,12 @@
 let usuario; //Objeto
 let conexao; //Intervalo
 let atualizaMensagens; //Intervalo
+let mensagem;
 
 function carregaMensagens (response) {
     const campoMensagens = document.querySelector(".mensagens");
     campoMensagens.innerHTML = "";
     for (let i = 0; i < response.data.length; i++) {
-
         if (response.data[i].type === "status") {
             campoMensagens.innerHTML += `
             <div class="mensagem status">
@@ -15,7 +15,6 @@ function carregaMensagens (response) {
                     <span class="usuario">${response.data[i].from}</span> ${response.data[i].text}
                 </p>
             </div>`
-            document.querySelector(".mensagem").scrollIntoView();
         }
         if (response.data[i].type === "message") {
             campoMensagens.innerHTML += `
@@ -25,7 +24,6 @@ function carregaMensagens (response) {
                     <span class="usuario">${response.data[i].from}</span> para <span class="destinatario">${response.data[i].to}</span>: ${response.data[i].text}
                 </p>
             </div>`
-            document.querySelector(".mensagem").scrollIntoView();
         }
         if (response.data[i].type === "private_message") {
             campoMensagens.innerHTML += `
@@ -35,9 +33,8 @@ function carregaMensagens (response) {
                     <span class="usuario">${response.data[i].from}</span> reservadamente para <span class="destinatario">${response.data[i].to}</span>: ${response.data[i].text}
                 </p>
             </div>`
-            document.querySelector(".mensagem").scrollIntoView();
         }
-
+        campoMensagens.scrollIntoView(false);
     }
 }
 
@@ -45,9 +42,8 @@ function buscaMensagens () {
     atualizaMensagens = setInterval(function () {
         let promise = axios.get("https://mock-api.driven.com.br/api/v6/uol/messages");
         promise.then(carregaMensagens);
-        }, 5000);
+        }, 2000);
 }
-
 
 function entrarSala () {
     const usuarioNome = prompt("Digite o seu nome:");
@@ -79,6 +75,24 @@ function mantemConexao (usuario) {
         axios.post("https://mock-api.driven.com.br/api/v6/uol/status", usuario)
         console.log("Ainda está online!")
     }, 3000)
+}
+
+function enviaMensagem (el) {
+    const textoMensagem = document.querySelector("input").value;
+    mensagem = {
+        from: usuario.name,
+        to: "Todos",
+        text: textoMensagem,
+        type: "message"
+    }
+
+    const promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages", mensagem);
+    promise.then(carregaMensagens);
+    promise.catch(function () {
+        window.location.reload();
+    })
+    
+    document.querySelector("input").value = "";
 }
 
 buscaMensagens();
