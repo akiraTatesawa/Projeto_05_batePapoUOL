@@ -24,6 +24,7 @@ strong {
     font-weight: bold;
 }
 
+
 ::placeholder {
     color: black;
     font-style: italic;
@@ -63,6 +64,10 @@ strong {
     border-radius: 2px;
 }
 
+.mensagem p {
+    display: inline-block;
+}
+
 .normal {
     background-color: #FFFFFF;
 }
@@ -79,6 +84,11 @@ strong {
     font-size: 14px;
     color: gray;
 }
+
+.destinatario, .usuario {
+    font-weight: bold;
+}
+
 
 /* FOOTER */
 footer {
