@@ -1,25 +1,36 @@
+let usuario; //Objeto
+let conexao; //setInterval
+
 function entrarSala () {
-    const usuario = prompt("Digite o seu nome:");
-    const usuarioObj = {
-        name: usuario
+    const usuarioNome = prompt("Digite o seu nome:");
+    const usuario = {
+        name: usuarioNome
     }
-    return usuarioObj;
+    return usuario;
 }
 
-function loginSucesso (response, usuario) {
+function loginSucesso () {
     console.log("Deu certo! Bem-vindo!");
+    mantemConexao(usuario);
 }
 
-function loginError (erro) {
+function loginError () {
     alert("Este nome já está sendo usado!");
     verificaUsuario();
 }
 
 function verificaUsuario () {
-    const usuario = entrarSala();
+    usuario = entrarSala();
     const promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants", usuario);
     promise.then(loginSucesso);
     promise.catch(loginError);
+}
+
+function mantemConexao (usuario) {
+    conexao = setInterval(function () {
+        axios.post("https://mock-api.driven.com.br/api/v6/uol/status", usuario)
+        console.log("Ainda está online!")
+    }, 3000)
 }
 
 verificaUsuario();
