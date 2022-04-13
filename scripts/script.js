@@ -1,5 +1,53 @@
 let usuario; //Objeto
-let conexao; //setInterval
+let conexao; //Intervalo
+let atualizaMensagens; //Intervalo
+
+function carregaMensagens (response) {
+    const campoMensagens = document.querySelector(".mensagens");
+    campoMensagens.innerHTML = "";
+    for (let i = 0; i < response.data.length; i++) {
+
+        if (response.data[i].type === "status") {
+            campoMensagens.innerHTML += `
+            <div class="mensagem status">
+                <p>
+                    <span class="horario">${response.data[i].time}</span>
+                    <span class="usuario">${response.data[i].from}</span> ${response.data[i].text}
+                </p>
+            </div>`
+            document.querySelector(".mensagem").scrollIntoView();
+        }
+        if (response.data[i].type === "message") {
+            campoMensagens.innerHTML += `
+            <div class="mensagem normal">
+                <p>
+                    <span class="horario">${response.data[i].time}</span>
+                    <span class="usuario">${response.data[i].from}</span> para <span class="destinatario">${response.data[i].to}</span>: ${response.data[i].text}
+                </p>
+            </div>`
+            document.querySelector(".mensagem").scrollIntoView();
+        }
+        if (response.data[i].type === "private_message") {
+            campoMensagens.innerHTML += `
+            <div class="mensagem reservada">
+                <p>
+                <span class="horario">${response.data[i].time}</span>
+                    <span class="usuario">${response.data[i].from}</span> reservadamente para <span class="destinatario">${response.data[i].to}</span>: ${response.data[i].text}
+                </p>
+            </div>`
+            document.querySelector(".mensagem").scrollIntoView();
+        }
+
+    }
+}
+
+function buscaMensagens () {
+    atualizaMensagens = setInterval(function () {
+        let promise = axios.get("https://mock-api.driven.com.br/api/v6/uol/messages");
+        promise.then(carregaMensagens);
+        }, 5000);
+}
+
 
 function entrarSala () {
     const usuarioNome = prompt("Digite o seu nome:");
@@ -33,4 +81,5 @@ function mantemConexao (usuario) {
     }, 3000)
 }
 
+buscaMensagens();
 verificaUsuario();
