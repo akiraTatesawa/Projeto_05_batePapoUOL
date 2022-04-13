@@ -53,6 +53,7 @@ function entrarSala () {
 }
 
 function loginSucesso () {
+    buscaMensagens();
     console.log("Deu certo! Bem-vindo!");
     document.querySelector(".tela-entrada").classList.add("escondido");
     mantemConexao(usuario);
@@ -116,5 +117,3 @@ inputLogin.addEventListener("keydown", function(e){
     }
 });
 
-
-buscaMensagens();
