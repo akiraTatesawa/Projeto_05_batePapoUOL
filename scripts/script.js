@@ -47,7 +47,7 @@ function buscaMensagens () {
 function entrarSala () {
     const usuarioNome = document.querySelector(".login").value;
     const usuario = {
-        name:usuarioNome
+        name: usuarioNome
     };
     return usuario;
 }
@@ -60,12 +60,13 @@ function loginSucesso () {
 }
 
 function loginError () {
-    alert("Este nome já está sendo usado! Digite outro!");
+    alert("Este nome já está sendo usado ou é um nome inválido. Digite outro!");
     window.location.reload();
 }
 
 function verificaUsuario () {
     usuario = entrarSala();
+
     const promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants", usuario);
 
     document.querySelector(".tela-entrada").innerHTML = `
@@ -84,8 +85,29 @@ function mantemConexao (usuario) {
     }, 3000);
 }
 
-function enviaMensagem (el) {
+function abreMenu () {
+//  Retirar a classe "escondido" da tela preta e do menu;
+    const telaPreta = document.querySelector(".tela-preta");
+    const menuLateral = document.querySelector(".menu-lateral");
+    telaPreta.classList.remove("escondido");
+    menuLateral.classList.remove("escondido");
+}
+
+function fechaMenu() {
+//  Adiciona a classe "escondido" na tela preta e no menu
+    const telaPreta = document.querySelector(".tela-preta");
+    const menuLateral = document.querySelector(".menu-lateral");
+    telaPreta.classList.add("escondido");
+    menuLateral.classList.add("escondido");
+}
+
+function enviaMensagem () {
     const textoMensagem = document.querySelector(".campo-mensagem").value;
+
+    if (textoMensagem === "") {
+        return;
+    }
+
     const mensagem = {
         from: usuario.name,
         to: "Todos",

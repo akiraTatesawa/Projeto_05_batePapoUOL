@@ -10,6 +10,11 @@
     <link rel="shortcut icon" type="image/x-icon" href="./media/favico.ico">
 </head>
 <body>
+    <div class="tela-preta escondido" onclick="fechaMenu()"></div>
+    <div class="menu-lateral escondido">
+        <h1>Escolha um contato<br>para enviar mensagem</h1>
+        
+    </div>
     <div class="tela-entrada">
         <img class="logo-entrada" src="./media/logo 2.png" alt="Logomarca do Bate-Papo UOL" />
         <input class="login"type="text" placeholder="Digite o seu nome">
@@ -18,14 +23,14 @@
     <header>
         <div class="header-conteudo">
             <img src="./media/logo 1.png" alt="Logomarca do Bate-Papo UOL" />
-            <ion-icon name="people"></ion-icon>
+            <ion-icon name="people" onclick="abreMenu()"></ion-icon>
         </div>
     </header>
     <div class="mensagens"></div>
     <footer>
         <div class="footer-conteudo">
             <input class="campo-mensagem" type="text" placeholder="Escreva aqui...">
-            <ion-icon class="send" name="paper-plane-outline" onclick="enviaMensagem(this)"></ion-icon>
+            <ion-icon class="send" name="paper-plane-outline" onclick="enviaMensagem()"></ion-icon>
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
