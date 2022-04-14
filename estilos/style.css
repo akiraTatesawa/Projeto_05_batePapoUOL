@@ -8,6 +8,7 @@ body {
     font-family: 'Encode Sans', sans-serif;
     font-family: 'Roboto', sans-serif;
     background-color: #F3F3F3;
+    overflow-x: hidden;
 }
 
 /* HEADER */
@@ -69,6 +70,7 @@ strong {
 
 .loading {
     width: 130px;
+    height: auto;
     margin-bottom: 10px;
 }
 
@@ -104,10 +106,12 @@ strong {
     font-size: 14px;
     line-height: 20px;
     border-radius: 2px;
+    overflow-wrap: break-word;
 }
 
 .mensagem p {
     display: inline-block;
+    width: 100%;
 }
 
 .normal {

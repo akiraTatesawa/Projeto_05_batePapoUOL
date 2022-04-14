@@ -19,7 +19,7 @@ function carregaMensagens (response) {
             campoMensagens.innerHTML += `
             <div class="mensagem normal">
                 <p>
-                    <span class="horario">${response.data[i].time}</span>
+                    <span class="horario">${response.data[i].time} </span>
                     <span class="usuario">${response.data[i].from}</span> para <span class="destinatario">${response.data[i].to}</span>: ${response.data[i].text}
                 </p>
             </div>`
@@ -39,7 +39,7 @@ function carregaMensagens (response) {
 
 function buscaMensagens () {
     atualizaMensagens = setInterval(function () {
-        let promise = axios.get("https://mock-api.driven.com.br/api/v6/uol/messages");
+        const promise = axios.get("https://mock-api.driven.com.br/api/v6/uol/messages");
         promise.then(carregaMensagens);
         }, 2500);
 }
@@ -60,7 +60,7 @@ function loginSucesso () {
 }
 
 function loginError () {
-    alert("Este nome já está sendo usado!");
+    alert("Este nome já está sendo usado! Digite outro!");
     window.location.reload();
 }
 
