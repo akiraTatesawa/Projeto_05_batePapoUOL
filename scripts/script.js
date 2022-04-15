@@ -26,7 +26,7 @@ function carregaMensagens (response) {
                 </p>
             </div>`
         }
-        if ((response.data[i].type === "private_message") && (response.data[i].to === usuario.name || response.data[i].from === usuario.name || response.data[i].to === "Todos")) {
+        if (ehMsgReservada(response.data[i])) {
             campoMensagens.innerHTML += `
             <div class="mensagem reservada">
                 <p>
@@ -37,6 +37,12 @@ function carregaMensagens (response) {
         }
     }
     campoMensagens.scrollIntoView(false);
+}
+
+function ehMsgReservada (mensagem) {
+    if ((mensagem.type === "private_message") && (mensagem.to === usuario.name || mensagem.from === usuario.name || mensagem.to === "Todos")) {
+        return true;
+    } 
 }
 
 function buscaMensagens () {
@@ -118,7 +124,6 @@ function buscaParticipantes () {
 }
 
 function abreMenu () {
-//  Retirar a classe "escondido" da tela preta e do menu;
     const telaPreta = document.querySelector(".tela-preta");
     const menuLateral = document.querySelector(".menu-lateral");
     const body = document.querySelector("body")
@@ -131,7 +136,6 @@ function abreMenu () {
 }
 
 function fechaMenu() {
-//  Adiciona a classe "escondido" na tela preta e no menu
     const telaPreta = document.querySelector(".tela-preta");
     const menuLateral = document.querySelector(".menu-lateral");
     const body = document.querySelector("body")
@@ -175,7 +179,6 @@ function registraVisibilidade (el) {
     } else {
         visibilidade = "message";
     }
-    
     alteraDescricao(visibilidade, recebe);
 }
 
@@ -189,9 +192,11 @@ function registraDestinatario (el) {
 }
 
 function enviaMensagem () {
-
     const textoMensagem = document.querySelector(".campo-mensagem").value;
-    if (textoMensagem === "") {
+    
+    //Impede o envio de mensagens em branco
+    if(textoMensagem.trim().length === 0) {
+        document.querySelector(".campo-mensagem").value = "";
         return;
     }
 
@@ -205,8 +210,7 @@ function enviaMensagem () {
     const promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages", mensagem);
     promise.then(carregaMensagens);
     promise.catch(function () {
-        alert("Mensagem inválida!")
-        console.log("falhou");
+        window.location.reload();
     });
 
     document.querySelector(".campo-mensagem").value = "";
