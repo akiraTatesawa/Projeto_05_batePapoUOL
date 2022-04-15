@@ -64,6 +64,7 @@ function entrarSala () {
 
 function loginSucesso () {
     buscaMensagens();
+    buscaParticipantes();
     console.log("Deu certo! Bem-vindo!");
     document.querySelector(".tela-entrada").classList.add("escondido");
     mantemConexao(usuario);
@@ -130,17 +131,18 @@ function abreMenu () {
     
     body.classList.add("tira-scroll");
     telaPreta.classList.remove("escondido");
+    telaPreta.classList.add("aparece");
     menuLateral.classList.add("menu-lateral-transition");
-
-    buscaParticipantes();
 }
 
 function fechaMenu() {
     const telaPreta = document.querySelector(".tela-preta");
     const menuLateral = document.querySelector(".menu-lateral");
     const body = document.querySelector("body")
+
     body.classList.remove("tira-scroll");
     telaPreta.classList.add("escondido");
+    telaPreta.classList.remove("aparece");
     menuLateral.classList.remove("menu-lateral-transition");
 }
 

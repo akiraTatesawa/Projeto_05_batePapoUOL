@@ -244,6 +244,7 @@ footer {
     font-style: italic;
     color: black;
     font-size: 18px;
+    word-wrap: break-word;
 }
 
 .footer-conteudo input::placeholder {
@@ -260,6 +261,7 @@ footer {
 }
 
 .envio {
+    width: 90%;
     display: flex;
     flex-direction: column;
     align-items: left;
