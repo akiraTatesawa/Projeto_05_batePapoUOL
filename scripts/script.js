@@ -96,7 +96,7 @@ function abreMenu () {
     body.classList.add("tira-scroll");
     telaPreta.classList.remove("escondido");
     menuLateral.classList.add("menu-lateral-transition");
-    // menuLateral.classList.add("coloca-scroll");
+    menuLateral.classList.add("coloca-scroll");
 }
 
 function fechaMenu() {
