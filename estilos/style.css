@@ -237,7 +237,7 @@ footer {
     height: 100%;
 }
 
-.footer-conteudo input {
+.campo-mensagem {
     width: 100%;
     border: none;
     outline: none;
@@ -247,11 +247,11 @@ footer {
     word-wrap: break-word;
 }
 
-.footer-conteudo input::placeholder {
+.campo-mensagem::placeholder {
     color: black;
 }
 
-.footer-conteudo input:focus {
+.campo-mensagem:focus {
     font-style: normal;
 }
 
