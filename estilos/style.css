@@ -262,7 +262,8 @@ footer {
 .envio {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
+    justify-content: center;
 }
 
 .descricao-mensagem {

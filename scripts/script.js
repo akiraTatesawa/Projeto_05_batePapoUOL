@@ -152,6 +152,17 @@ function check(el, classe) {
     el.querySelector(".checkmark").classList.add("aparece");
 }
 
+function alteraDescricao (visibilidade, recebe) {
+    const descricaoMensagem = document.querySelector(".descricao-mensagem");
+
+    if (visibilidade === "message") {
+        descricaoMensagem.innerHTML = `Enviando para ${recebe}`;
+    }
+    if (visibilidade === "private_message") {
+        descricaoMensagem.innerHTML = `Enviando para ${recebe} (reservadamente)`;
+    }
+}
+
 function registraVisibilidade (el) {
     const classe = ".visibilidades .selecionado";
     check(el, classe);
@@ -165,6 +176,7 @@ function registraVisibilidade (el) {
         visibilidade = "message";
     }
     
+    alteraDescricao(visibilidade, recebe);
 }
 
 function registraDestinatario (el) {
@@ -173,6 +185,7 @@ function registraDestinatario (el) {
 
     recebe = el.querySelector("span").innerHTML;
     console.log(recebe);
+    alteraDescricao(visibilidade, recebe);
 }
 
 function enviaMensagem () {
@@ -192,7 +205,7 @@ function enviaMensagem () {
     const promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages", mensagem);
     promise.then(carregaMensagens);
     promise.catch(function () {
-        window.location.reload();
+        alert("Mensagem inválida!")
         console.log("falhou");
     });
 
