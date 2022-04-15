@@ -4,6 +4,12 @@ let atualizaMensagens; //Intervalo
 let visibilidade = "message"; //Visibilidade da mensagem
 let recebe = "Todos"; //Destinatário
 
+function ehMsgReservada (mensagem) {
+    if ((mensagem.type === "private_message") && (mensagem.to === usuario.name || mensagem.from === usuario.name || mensagem.to === "Todos")) {
+        return true;
+    } 
+}
+
 function carregaMensagens (response) {
     const campoMensagens = document.querySelector(".mensagens");
     campoMensagens.innerHTML = "";
@@ -37,12 +43,6 @@ function carregaMensagens (response) {
         }
     }
     campoMensagens.scrollIntoView(false);
-}
-
-function ehMsgReservada (mensagem) {
-    if ((mensagem.type === "private_message") && (mensagem.to === usuario.name || mensagem.from === usuario.name || mensagem.to === "Todos")) {
-        return true;
-    } 
 }
 
 function buscaMensagens () {
