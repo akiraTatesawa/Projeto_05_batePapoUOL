@@ -82,7 +82,7 @@ function verificaUsuario () {
 
 function mantemConexao (usuario) {
     conexao = setInterval(function () {
-        axios.post("https://mock-api.driven.com.br/api/v6/uol/status", usuario)
+        axios.post("https://mock-api.driven.com.br/api/v6/uol/status", usuario);
         console.log("Ainda está online!")
     }, 3000);
 }
@@ -91,16 +91,22 @@ function abreMenu () {
 //  Retirar a classe "escondido" da tela preta e do menu;
     const telaPreta = document.querySelector(".tela-preta");
     const menuLateral = document.querySelector(".menu-lateral");
+    const body = document.querySelector("body")
+    
+    body.classList.add("tira-scroll");
     telaPreta.classList.remove("escondido");
-    menuLateral.classList.remove("escondido");
+    menuLateral.classList.add("menu-lateral-transition");
+    // menuLateral.classList.add("coloca-scroll");
 }
 
 function fechaMenu() {
 //  Adiciona a classe "escondido" na tela preta e no menu
     const telaPreta = document.querySelector(".tela-preta");
     const menuLateral = document.querySelector(".menu-lateral");
+    const body = document.querySelector("body")
+    body.classList.remove("tira-scroll");
     telaPreta.classList.add("escondido");
-    menuLateral.classList.add("escondido");
+    menuLateral.classList.remove("menu-lateral-transition");
 }
 
 function enviaMensagem () {
