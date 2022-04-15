@@ -1,6 +1,8 @@
 let usuario; //Objeto
 let conexao; //Intervalo
 let atualizaMensagens; //Intervalo
+let visibilidade = "message"; //Visibilidade da mensagem
+let recebe = "Todos"; //Destinatário
 
 function carregaMensagens (response) {
     const campoMensagens = document.querySelector(".mensagens");
@@ -87,6 +89,34 @@ function mantemConexao (usuario) {
     }, 3000);
 }
 
+function carregaParticipantes (response) {
+    const campoParticipantes = document.querySelector(".participantes");
+    campoParticipantes.innerHTML = "";
+    campoParticipantes.innerHTML += `
+        <div class="item-menu-lateral" onclick="registraDestinatario(this)">
+            <ion-icon name="people" class="icone-participantes"></ion-icon>
+            <span>Todos</span>
+            <ion-icon name="checkmark-outline" class="checkmark"></ion-icon>
+        </div>`;
+    for (let i = 0; i < response.data.length; i++) {
+        campoParticipantes.innerHTML += `
+        <div class="item-menu-lateral" onclick="registraDestinatario(this)">
+            <ion-icon name="person-circle" class="icone-participantes"></ion-icon>
+            <span>${response.data[i].name}</span>
+            <ion-icon name="checkmark-outline" class="checkmark"></ion-icon>
+        </div>`;
+    }
+}
+
+function buscaParticipantes () {
+    const promise = axios.get("https://mock-api.driven.com.br/api/v6/uol/participants");
+    promise.then(carregaParticipantes);
+    setInterval(function () {
+        const promise = axios.get("https://mock-api.driven.com.br/api/v6/uol/participants");
+        promise.then(carregaParticipantes);
+    }, 9000);
+}
+
 function abreMenu () {
 //  Retirar a classe "escondido" da tela preta e do menu;
     const telaPreta = document.querySelector(".tela-preta");
@@ -96,7 +126,8 @@ function abreMenu () {
     body.classList.add("tira-scroll");
     telaPreta.classList.remove("escondido");
     menuLateral.classList.add("menu-lateral-transition");
-    menuLateral.classList.add("coloca-scroll");
+
+    buscaParticipantes();
 }
 
 function fechaMenu() {
@@ -109,6 +140,41 @@ function fechaMenu() {
     menuLateral.classList.remove("menu-lateral-transition");
 }
 
+function check(el, classe) {
+    const selecionado = document.querySelector(classe);
+
+    if (selecionado) {
+        selecionado.classList.remove("selecionado");
+        selecionado.querySelector(".checkmark").classList.remove("aparece");
+    }
+
+    el.classList.add("selecionado");
+    el.querySelector(".checkmark").classList.add("aparece");
+}
+
+function registraVisibilidade (el) {
+    const classe = ".visibilidades .selecionado";
+    check(el, classe);
+
+    const opcao = el.querySelector("span").innerHTML;
+    console.log(opcao);
+
+    if (opcao === "Reservadamente") {
+        visibilidade = "private_message";
+    } else {
+        visibilidade = "message";
+    }
+    
+}
+
+function registraDestinatario (el) {
+    const classe = ".participantes .selecionado";
+    check(el, classe);
+
+    recebe = el.querySelector("span").innerHTML;
+    console.log(recebe);
+}
+
 function enviaMensagem () {
 
     const textoMensagem = document.querySelector(".campo-mensagem").value;
@@ -118,9 +184,9 @@ function enviaMensagem () {
 
     const mensagem = {
         from: usuario.name,
-        to: "Todos",
+        to: recebe,
         text: textoMensagem,
-        type: "message"
+        type: visibilidade
     }
 
     const promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages", mensagem);

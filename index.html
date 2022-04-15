@@ -13,18 +13,20 @@
     <div class="tela-preta escondido" onclick="fechaMenu()"></div>
     <div class="menu-lateral">
         <h1>Escolha um contato<br>para enviar mensagem</h1>
-        <h1>Escolha um contato<br>para enviar mensagem</h1>
-        <h1>Escolha um contato<br>para enviar mensagem</h1>
-        <h1>Escolha um contato<br>para enviar mensagem</h1>
-        <h1>Escolha um contato<br>para enviar mensagem</h1>
-        <h1>Escolha um contato<br>para enviar mensagem</h1>
-        <h1>Escolha um contato<br>para enviar mensagem</h1>
-        <h1>Escolha um contato<br>para enviar mensagem</h1>
-        <h1>Escolha um contato<br>para enviar mensagem</h1>
-        <h1>Escolha um contato<br>para enviar mensagem</h1>
-        <h1>Escolha um contato<br>para enviar mensagem</h1>
-        <h1>Escolha um contato<br>para enviar mensagem</h1>
-        <h1>Escolha um contato<br>para enviar mensagem</h1>
+        <div class="participantes"></div>
+        <h1>Escolha a visibilidade</h1>
+        <div class="visibilidades">
+            <div class="item-menu-lateral" onclick="registraVisibilidade(this)">
+                <ion-icon name="lock-open" class="icone-menu-lateral"></ion-icon>
+                <span>Público</span>
+                <ion-icon name="checkmark-outline" class="checkmark"></ion-icon>
+            </div>
+            <div class="item-menu-lateral" onclick="registraVisibilidade(this)"> 
+                <ion-icon name="lock-closed" class="icone-menu-lateral"></ion-icon>
+                <span>Reservadamente</span>
+                <ion-icon name="checkmark-outline" class="checkmark"></ion-icon>
+            </div>
+        </div>  
     </div>
     <div class="tela-entrada">
         <img class="logo-entrada" src="./media/logo 2.png" alt="Logomarca do Bate-Papo UOL" />
@@ -42,7 +44,10 @@
     </div>
     <footer>
         <div class="footer-conteudo">
-            <input class="campo-mensagem" type="text" placeholder="Escreva aqui...">
+            <div class="envio">
+                <input class="campo-mensagem" type="text" placeholder="Escreva aqui...">
+                <span class="descricao-mensagem">Enviando para Maria (reservadamente)</span>
+            </div>
             <ion-icon class="send" name="paper-plane-outline" onclick="enviaMensagem()"></ion-icon>
         </div>
     </footer>

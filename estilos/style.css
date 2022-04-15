@@ -18,10 +18,6 @@ strong {
     overflow-y: hidden;
 }
 
-.coloca-scroll {
-    overflow: scroll;
-}
-
 /* HEADER */
 header {
     position: fixed;
@@ -86,6 +82,46 @@ header {
     line-height: 19px;
     font-size: 16px;
     font-weight: bold;
+}
+
+.participantes {
+    width: 100%;
+    height: 40%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.item-menu-lateral {
+    position: relative;
+    height: 36px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    margin: 0 20px;
+}
+
+.item-menu-lateral span {
+    width: 60%;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.item-menu-lateral {
+    font-size: 24px;
+}
+
+.checkmark {
+    opacity: 0;
+    position: absolute;
+    right: 20%;
+    color: rgb(40, 187, 37);
+    --ionicon-stroke-width: 80px;
+    font-size: 15px;
+}
+
+.aparece {
+    opacity: 1;
 }
 
 /* TELA ENTRADA */
@@ -221,6 +257,19 @@ footer {
 .footer-conteudo ion-icon {
     font-size: 26px;
     cursor: pointer;
+}
+
+.envio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.descricao-mensagem {
+    font-size: 14px;
+    font-weight: 400;
+    color: #AEAEAE;
+    padding-top: 5px;
 }
 
 .escondido {
