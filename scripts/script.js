@@ -38,6 +38,8 @@ function carregaMensagens (response) {
 }
 
 function buscaMensagens () {
+    const promise = axios.get("https://mock-api.driven.com.br/api/v6/uol/messages");
+    promise.then(carregaMensagens);
     atualizaMensagens = setInterval(function () {
         const promise = axios.get("https://mock-api.driven.com.br/api/v6/uol/messages");
         promise.then(carregaMensagens);
@@ -102,8 +104,8 @@ function fechaMenu() {
 }
 
 function enviaMensagem () {
-    const textoMensagem = document.querySelector(".campo-mensagem").value;
 
+    const textoMensagem = document.querySelector(".campo-mensagem").value;
     if (textoMensagem === "") {
         return;
     }
