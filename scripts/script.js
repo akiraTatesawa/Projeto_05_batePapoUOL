@@ -26,7 +26,7 @@ function carregaMensagens (response) {
                 </p>
             </div>`
         }
-        if (response.data[i].type === "private_message") {
+        if ((response.data[i].type === "private_message") && (response.data[i].to === usuario.name || response.data[i].from === usuario.name || response.data[i].to === "Todos")) {
             campoMensagens.innerHTML += `
             <div class="mensagem reservada">
                 <p>
